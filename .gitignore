@@ -1,0 +1,29 @@
+# Nuxt
+.nuxt
+.output
+.data
+.nitro
+.cache
+dist
+
+# Dependencies
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Misc
+.DS_Store
+.fleet
+.idea
+*.tsbuildinfo
+
+# Supabase
+supabase/.temp

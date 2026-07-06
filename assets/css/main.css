@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — canais RGB para permitir utilitários de opacidade do Tailwind
+ * (ex.: bg-primary/10). Nunca usar cores hardcoded fora deste arquivo.
+ */
+:root {
+  --color-bg: 247 248 250;
+  --color-surface: 255 255 255;
+  --color-surface-muted: 243 244 246;
+  --color-border: 226 229 234;
+  --color-text: 24 31 42;
+  --color-text-muted: 100 110 124;
+  --color-primary: 29 78 216;
+  --color-primary-contrast: 255 255 255;
+  --color-success: 22 143 92;
+  --color-warning: 200 138 12;
+  --color-danger: 209 55 55;
+
+  /* Status do funil */
+  --status-novo: 100 110 124;
+  --status-contatado: 37 99 235;
+  --status-convidado: 124 58 237;
+  --status-presente_pg: 13 148 136;
+  --status-em_vinculo: 22 143 92;
+  --status-integrado: 15 118 74;
+  --status-sem_resposta: 200 138 12;
+  --status-reativacao: 219 108 20;
+  --status-arquivado: 120 128 140;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: 16 20 27;
+    --color-surface: 24 30 40;
+    --color-surface-muted: 32 39 51;
+    --color-border: 44 53 67;
+    --color-text: 233 237 243;
+    --color-text-muted: 150 160 174;
+    --color-primary: 96 143 255;
+    --color-primary-contrast: 12 16 22;
+    --color-success: 52 190 130;
+    --color-warning: 224 170 58;
+    --color-danger: 240 110 110;
+  }
+}
+
+html,
+body {
+  @apply bg-bg text-text antialiased;
+}
+
+body {
+  font-family:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+}

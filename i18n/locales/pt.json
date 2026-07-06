@@ -1,0 +1,94 @@
+{
+  "app": {
+    "name": "Pequenos Grupos"
+  },
+  "common": {
+    "save": "Salvar",
+    "retry": "Tentar de novo",
+    "back": "Voltar",
+    "loading": "Carregando…"
+  },
+  "nav": {
+    "today": "Hoje",
+    "logout": "Sair"
+  },
+  "auth": {
+    "title": "Entrar",
+    "subtitle": "Acesse o acompanhamento de visitantes",
+    "email": "E-mail",
+    "password": "Senha",
+    "signIn": "Entrar",
+    "error": "Não foi possível entrar. Verifique seus dados."
+  },
+  "today": {
+    "title": "Hoje",
+    "subtitle": "Próximas ações por urgência",
+    "overdue": "{count} atrasada(s)",
+    "dueSoon": "{count} vencendo",
+    "empty": "Nenhuma ação pendente",
+    "emptyDescription": "Todos os visitantes estão em dia. Bom trabalho!",
+    "sendWhatsapp": "WhatsApp",
+    "registerContact": "Registrar contato"
+  },
+  "sla": {
+    "overdue": "Atrasado",
+    "dueSoon": "Vence {when}"
+  },
+  "visitor": {
+    "noPadrinho": "Sem padrinho",
+    "status": {
+      "novo": "Novo",
+      "contatado": "Contatado",
+      "convidado": "Convidado",
+      "presente_pg": "Presente no PG",
+      "em_vinculo": "Em vínculo",
+      "integrado": "Integrado",
+      "sem_resposta": "Sem resposta",
+      "reativacao": "Reativação",
+      "arquivado": "Arquivado"
+    }
+  },
+  "interaction": {
+    "type": {
+      "mensagem": "Mensagem",
+      "ligacao": "Ligação",
+      "presenca_pg": "Presença no PG",
+      "presenca_culto": "Presença no culto",
+      "visita": "Visita",
+      "mudanca_status": "Mudança de status",
+      "nota": "Nota"
+    }
+  },
+  "timeline": {
+    "statusChange": "Status: {from} → {to}"
+  },
+  "profile": {
+    "firstVisit": "Primeira visita em {date}",
+    "moveVisitor": "Avançar no funil",
+    "finalStatus": "Visitante integrado — funil concluído.",
+    "relations": "PG e padrinho",
+    "pg": "Pequeno grupo",
+    "selectPg": "Selecionar PG",
+    "padrinho": "Padrinho",
+    "selectPadrinho": "Selecionar padrinho",
+    "amizadeConfirmada": "Amizade confirmada (checkpoint dia 30)",
+    "responsabilidade": "Responsabilidade no PG",
+    "responsabilidadePlaceholder": "Ex.: ajudar no lanche",
+    "quickActions": "Ações rápidas",
+    "notePlaceholder": "Adicionar uma nota…",
+    "timeline": "Histórico",
+    "emptyTimeline": "Nenhuma interação ainda",
+    "notFound": "Visitante não encontrado",
+    "back": "Voltar para Hoje"
+  },
+  "whatsapp": {
+    "templates": {
+      "welcome": "Oi, {name}! Que bom ter você com a gente no sábado! Qualquer coisa que precisar, pode me chamar por aqui, tá?",
+      "invite": "{name}, essa semana tem nosso PG de jovens! É bem tranquilo — conversa, lanche e um papo sobre a Palavra. Você vai ser super bem recebido. Topa?",
+      "presenting": "E aí, {name}! O pessoal do PG tá te esperando essa semana. Se quiser, a gente vai junto!",
+      "missed": "{name}, sentimos sua falta! Ficou complicado o horário ou rolou algum imprevisto? Me fala que a gente dá um jeito.",
+      "reactivation": "Oi, {name}! Faz um tempinho que você visitou a gente e as portas continuam abertas. Ia ser demais te ver de novo, sem compromisso nenhum!",
+      "generic": "Oi, {name}! Tudo bem? Passando pra falar com você."
+    }
+  }
+}
