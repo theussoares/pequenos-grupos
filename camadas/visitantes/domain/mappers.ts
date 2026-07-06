@@ -38,6 +38,7 @@ export function toVisitor(row: VisitorRow): Visitor {
     ultimoContatoEm: row.ultimo_contato_em,
     amizadeConfirmada: row.amizade_confirmada,
     responsabilidade: row.responsabilidade,
+    statusChangedAt: row.status_changed_at,
     createdAt: row.created_at,
     updatedAt: row.updated_at
   }

@@ -10,6 +10,8 @@
   },
   "nav": {
     "today": "Hoy",
+    "kanban": "Embudo",
+    "afilhados": "Mi ahijado",
     "logout": "Salir"
   },
   "auth": {
@@ -80,6 +82,35 @@
     "emptyTimeline": "Aún no hay interacciones",
     "notFound": "Visitante no encontrado",
     "back": "Volver a Hoy"
+  },
+  "kanban": {
+    "title": "Embudo de asimilación",
+    "subtitle": "Arrastra o toca mover para cambiar el estado",
+    "daysInStatus": "{count}d en el estado",
+    "move": "Mover",
+    "empty": "Sin visitantes",
+    "overdue": "SLA vencido"
+  },
+  "afilhado": {
+    "title": "Mi ahijado",
+    "subtitle": "Dos acciones por semana, sin burocracia",
+    "empty": "Aún no hay ahijados",
+    "emptyDescription": "Cuando recibas un visitante, aparecerá aquí.",
+    "nextPg": "Próximo PG",
+    "noPg": "PG por definir",
+    "veio": "Sí vino",
+    "naoVeio": "No vino",
+    "mensagem": "Le escribí",
+    "missedNote": "No asistió al PG"
+  },
+  "weekday": {
+    "0": "Domingo",
+    "1": "Lunes",
+    "2": "Martes",
+    "3": "Miércoles",
+    "4": "Jueves",
+    "5": "Viernes",
+    "6": "Sábado"
   },
   "whatsapp": {
     "templates": {

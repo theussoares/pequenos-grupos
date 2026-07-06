@@ -51,7 +51,8 @@ export function useVisitorActions() {
       await persistPatch(visitor, {
         status: to,
         proximo_contato_em: deadline ? deadline.toISOString() : null,
-        ultimo_contato_em: now.toISOString()
+        ultimo_contato_em: now.toISOString(),
+        status_changed_at: now.toISOString()
       })
       await repository.insertInteraction({
         visitante_id: visitor.id,

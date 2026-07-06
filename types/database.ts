@@ -23,6 +23,7 @@ export type VisitorRow = {
   ultimo_contato_em: string | null
   amizade_confirmada: boolean
   responsabilidade: string | null
+  status_changed_at: string
   created_at: string
   updated_at: string
 }

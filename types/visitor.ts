@@ -17,6 +17,7 @@ export interface Visitor {
   ultimoContatoEm: string | null
   amizadeConfirmada: boolean
   responsabilidade: string | null
+  statusChangedAt: string
   createdAt: string
   updatedAt: string
 }
@@ -28,4 +29,12 @@ export interface TodayAction {
   pgNome: string | null
   deadline: Date | null
   urgency: SlaUrgency
+}
+
+/** Card do Kanban: visitante + métricas derivadas para exibição na coluna. */
+export interface BoardCard {
+  visitor: Visitor
+  padrinhoNome: string | null
+  daysInStatus: number
+  isOverdue: boolean
 }

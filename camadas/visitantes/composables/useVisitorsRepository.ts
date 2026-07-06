@@ -51,6 +51,37 @@ export function useVisitorsRepository() {
     return (data as VisitorRow[]).map(toVisitor)
   }
 
+  async function fetchBoard(): Promise<Visitor[]> {
+    const { data, error } = await supabase
+      .from('visitantes')
+      .select('*')
+      .neq('status', 'arquivado')
+      .order('proximo_contato_em', { ascending: true, nullsFirst: false })
+    if (error) throw error
+    return (data as VisitorRow[]).map(toVisitor)
+  }
+
+  async function fetchAfilhados(padrinhoId: string): Promise<Visitor[]> {
+    const { data, error } = await supabase
+      .from('visitantes')
+      .select('*')
+      .eq('padrinho_id', padrinhoId)
+      .neq('status', 'arquivado')
+      .order('nome')
+    if (error) throw error
+    return (data as VisitorRow[]).map(toVisitor)
+  }
+
+  async function fetchCurrentProfile(userId: string): Promise<Profile | null> {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .maybeSingle()
+    if (error) throw error
+    return data ? toProfile(data as ProfileRow) : null
+  }
+
   async function fetchVisitor(id: string): Promise<Visitor | null> {
     const { data, error } = await supabase
       .from('visitantes')
@@ -119,6 +150,9 @@ export function useVisitorsRepository() {
 
   return {
     fetchQueue,
+    fetchBoard,
+    fetchAfilhados,
+    fetchCurrentProfile,
     fetchVisitor,
     fetchTimeline,
     fetchPgs,

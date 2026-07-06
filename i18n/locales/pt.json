@@ -10,6 +10,8 @@
   },
   "nav": {
     "today": "Hoje",
+    "kanban": "Funil",
+    "afilhados": "Meu afilhado",
     "logout": "Sair"
   },
   "auth": {
@@ -80,6 +82,35 @@
     "emptyTimeline": "Nenhuma interação ainda",
     "notFound": "Visitante não encontrado",
     "back": "Voltar para Hoje"
+  },
+  "kanban": {
+    "title": "Funil de assimilação",
+    "subtitle": "Arraste ou toque em mover para mudar o status",
+    "daysInStatus": "{count}d no status",
+    "move": "Mover",
+    "empty": "Sem visitantes",
+    "overdue": "SLA vencido"
+  },
+  "afilhado": {
+    "title": "Meu afilhado",
+    "subtitle": "Duas ações por semana, sem burocracia",
+    "empty": "Nenhum afilhado ainda",
+    "emptyDescription": "Quando você receber um visitante, ele aparece aqui.",
+    "nextPg": "Próximo PG",
+    "noPg": "PG a definir",
+    "veio": "Ele veio",
+    "naoVeio": "Não veio",
+    "mensagem": "Mandei mensagem",
+    "missedNote": "Não compareceu ao PG"
+  },
+  "weekday": {
+    "0": "Domingo",
+    "1": "Segunda",
+    "2": "Terça",
+    "3": "Quarta",
+    "4": "Quinta",
+    "5": "Sexta",
+    "6": "Sábado"
   },
   "whatsapp": {
     "templates": {
