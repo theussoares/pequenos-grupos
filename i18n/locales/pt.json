@@ -12,7 +12,22 @@
     "today": "Hoje",
     "kanban": "Funil",
     "afilhados": "Meu afilhado",
+    "recepcao": "Recepção",
     "logout": "Sair"
+  },
+  "reception": {
+    "title": "Recepção",
+    "subtitle": "Cadastro rápido do visitante",
+    "name": "Nome",
+    "namePlaceholder": "Nome do visitante",
+    "phone": "Telefone",
+    "phonePlaceholder": "(11) 90000-0000",
+    "age": "Idade",
+    "howMet": "Como conheceu",
+    "howMetPlaceholder": "Amigo, evento, redes…",
+    "submit": "Cadastrar visitante",
+    "invalid": "Preencha ao menos o nome.",
+    "recentTitle": "Cadastrados agora"
   },
   "auth": {
     "title": "Entrar",

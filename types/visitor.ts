@@ -38,3 +38,11 @@ export interface BoardCard {
   daysInStatus: number
   isOverdue: boolean
 }
+
+/** Resumo de um visitante cadastrado nesta sessão de recepção (feedback local). */
+export interface RegisteredVisitorSummary {
+  nome: string
+  telefone: string | null
+  comoConheceu: string | null
+  registeredAt: string
+}

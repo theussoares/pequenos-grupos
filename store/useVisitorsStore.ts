@@ -56,7 +56,9 @@ export const useVisitorsStore = defineStore('visitors', {
 
     isAdmin: (state): boolean => state.currentProfile?.role === 'admin',
     isLider: (state): boolean => state.currentProfile?.role === 'lider',
-    isPadrinho: (state): boolean => state.currentProfile?.role === 'padrinho'
+    isPadrinho: (state): boolean => state.currentProfile?.role === 'padrinho',
+    isRecepcionista: (state): boolean =>
+      state.currentProfile?.role === 'recepcionista'
   },
 
   actions: {

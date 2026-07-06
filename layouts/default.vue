@@ -6,7 +6,7 @@ const user = useSupabaseUser()
 const { signOut } = useAuth()
 const { loadProfile } = useCurrentProfile()
 const store = useVisitorsStore()
-const { isPadrinho } = storeToRefs(store)
+const { isPadrinho, isRecepcionista, isAdmin } = storeToRefs(store)
 const router = useRouter()
 
 interface NavItem {
@@ -15,16 +15,26 @@ interface NavItem {
   icon: string
 }
 
+const RECEPTION_ITEM: NavItem = {
+  to: '/recepcao',
+  label: t('nav.recepcao'),
+  icon: 'lucide:user-plus'
+}
+
 const navItems = computed<NavItem[]>(() => {
   if (isPadrinho.value) {
     return [
       { to: '/meu-afilhado', label: t('nav.afilhados'), icon: 'lucide:heart-handshake' }
     ]
   }
-  return [
+  if (isRecepcionista.value) return [RECEPTION_ITEM]
+
+  const items: NavItem[] = [
     { to: '/hoje', label: t('nav.today'), icon: 'lucide:list-checks' },
     { to: '/kanban', label: t('nav.kanban'), icon: 'lucide:columns-3' }
   ]
+  if (isAdmin.value) items.push(RECEPTION_ITEM)
+  return items
 })
 
 watch(

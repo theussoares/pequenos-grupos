@@ -12,7 +12,22 @@
     "today": "Hoy",
     "kanban": "Embudo",
     "afilhados": "Mi ahijado",
+    "recepcao": "Recepción",
     "logout": "Salir"
+  },
+  "reception": {
+    "title": "Recepción",
+    "subtitle": "Registro rápido del visitante",
+    "name": "Nombre",
+    "namePlaceholder": "Nombre del visitante",
+    "phone": "Teléfono",
+    "phonePlaceholder": "(11) 90000-0000",
+    "age": "Edad",
+    "howMet": "Cómo nos conoció",
+    "howMetPlaceholder": "Amigo, evento, redes…",
+    "submit": "Registrar visitante",
+    "invalid": "Completa al menos el nombre.",
+    "recentTitle": "Registrados ahora"
   },
   "auth": {
     "title": "Entrar",

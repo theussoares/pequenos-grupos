@@ -138,6 +138,11 @@ export function useVisitorsRepository() {
     return toVisitor(data as VisitorRow)
   }
 
+  async function insertVisitor(payload: Partial<VisitorRow>): Promise<void> {
+    const { error } = await supabase.from('visitantes').insert(payload)
+    if (error) throw error
+  }
+
   async function insertInteraction(payload: InteractionInsert): Promise<void> {
     const { error } = await supabase.from('interacoes').insert(payload)
     if (error) throw error
@@ -157,6 +162,7 @@ export function useVisitorsRepository() {
     fetchTimeline,
     fetchPgs,
     fetchPotentialPadrinhos,
+    insertVisitor,
     updateVisitor,
     insertInteraction,
     insertPresence
