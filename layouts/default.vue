@@ -33,7 +33,12 @@ const navItems = computed<NavItem[]>(() => {
     { to: '/hoje', label: t('nav.today'), icon: 'lucide:list-checks' },
     { to: '/kanban', label: t('nav.kanban'), icon: 'lucide:columns-3' }
   ]
-  if (isAdmin.value) items.push(RECEPTION_ITEM)
+  if (isAdmin.value) {
+    items.push(
+      { to: '/metricas', label: t('nav.metricas'), icon: 'lucide:chart-column' },
+      RECEPTION_ITEM
+    )
+  }
   return items
 })
 

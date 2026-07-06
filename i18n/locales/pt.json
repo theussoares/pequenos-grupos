@@ -13,7 +13,36 @@
     "kanban": "Funil",
     "afilhados": "Meu afilhado",
     "recepcao": "Recepção",
+    "metricas": "Métricas",
     "logout": "Sair"
+  },
+  "metrics": {
+    "title": "Métricas",
+    "subtitle": "Saúde do funil de assimilação",
+    "contactRate": "Taxa de contato",
+    "pgConversion": "Conversão ao PG",
+    "retention30": "Retenção 30 dias",
+    "retention90": "Retenção 90 dias",
+    "vinculo": "Vínculo",
+    "cohort": "Novos no mês",
+    "funnelTitle": "Funil do mês",
+    "trendTitle": "Tendência mensal",
+    "overdueTitle": "SLAs vencidos",
+    "overdueEmpty": "Nenhum SLA vencido",
+    "daysOverdue": "{count}d",
+    "stage": {
+      "novos": "Novos",
+      "contatados": "Contatados",
+      "noPG": "Foram ao PG",
+      "emVinculo": "Em vínculo"
+    },
+    "goal": {
+      "contact": "meta 100%",
+      "pg": "meta 50%+",
+      "ret30": "meta 30%+",
+      "ret90": "meta 20%+",
+      "vinculo": "maioria"
+    }
   },
   "reception": {
     "title": "Recepção",

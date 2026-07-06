@@ -8,6 +8,7 @@ interface VisitorsState {
   queue: Visitor[]
   board: Visitor[]
   afilhados: Visitor[]
+  metricsVisitors: Visitor[]
   activeVisitor: Visitor | null
   timeline: Interaction[]
   pgs: Pg[]
@@ -36,6 +37,7 @@ export const useVisitorsStore = defineStore('visitors', {
     queue: [],
     board: [],
     afilhados: [],
+    metricsVisitors: [],
     activeVisitor: null,
     timeline: [],
     pgs: [],
@@ -80,6 +82,10 @@ export const useVisitorsStore = defineStore('visitors', {
 
     setAfilhados(visitors: Visitor[]) {
       this.afilhados = visitors
+    },
+
+    setMetricsVisitors(visitors: Visitor[]) {
+      this.metricsVisitors = visitors
     },
 
     setLookups(pgs: Pg[], padrinhos: Profile[]) {

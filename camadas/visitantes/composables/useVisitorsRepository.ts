@@ -61,6 +61,12 @@ export function useVisitorsRepository() {
     return (data as VisitorRow[]).map(toVisitor)
   }
 
+  async function fetchAllVisitors(): Promise<Visitor[]> {
+    const { data, error } = await supabase.from('visitantes').select('*')
+    if (error) throw error
+    return (data as VisitorRow[]).map(toVisitor)
+  }
+
   async function fetchAfilhados(padrinhoId: string): Promise<Visitor[]> {
     const { data, error } = await supabase
       .from('visitantes')
@@ -156,6 +162,7 @@ export function useVisitorsRepository() {
   return {
     fetchQueue,
     fetchBoard,
+    fetchAllVisitors,
     fetchAfilhados,
     fetchCurrentProfile,
     fetchVisitor,

@@ -13,7 +13,36 @@
     "kanban": "Embudo",
     "afilhados": "Mi ahijado",
     "recepcao": "Recepción",
+    "metricas": "Métricas",
     "logout": "Salir"
+  },
+  "metrics": {
+    "title": "Métricas",
+    "subtitle": "Salud del embudo de asimilación",
+    "contactRate": "Tasa de contacto",
+    "pgConversion": "Conversión al PG",
+    "retention30": "Retención 30 días",
+    "retention90": "Retención 90 días",
+    "vinculo": "Vínculo",
+    "cohort": "Nuevos del mes",
+    "funnelTitle": "Embudo del mes",
+    "trendTitle": "Tendencia mensual",
+    "overdueTitle": "SLA vencidos",
+    "overdueEmpty": "Ningún SLA vencido",
+    "daysOverdue": "{count}d",
+    "stage": {
+      "novos": "Nuevos",
+      "contatados": "Contactados",
+      "noPG": "Fueron al PG",
+      "emVinculo": "En vínculo"
+    },
+    "goal": {
+      "contact": "meta 100%",
+      "pg": "meta 50%+",
+      "ret30": "meta 30%+",
+      "ret90": "meta 20%+",
+      "vinculo": "mayoría"
+    }
   },
   "reception": {
     "title": "Recepción",
