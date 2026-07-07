@@ -27,3 +27,6 @@ npm-debug.log*
 
 # Supabase
 supabase/.temp
+
+# Preview (screenshots gerados)
+preview/shots

@@ -80,7 +80,15 @@ npm run lint:fix    # ESLint com correção
 npm run typecheck   # vue-tsc (checagem de tipos)
 npm run test:unit   # Vitest (run único)
 npm run test        # Vitest (watch)
+npm run preview:screens  # preview com mock do Supabase + screenshots
 ```
+
+## Preview local sem Supabase
+
+`npm run preview:screens` sobe o app apontado para um mock da API do Supabase
+(dados de exemplo) e captura screenshots das telas em `preview/shots/`. Veja
+[`preview/README.md`](preview/README.md) — útil para revisar as telas sem um
+projeto Supabase configurado.
 
 ## Regras de negócio (Fase 1)
 
