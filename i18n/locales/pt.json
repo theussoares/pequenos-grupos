@@ -61,10 +61,15 @@
   "auth": {
     "title": "Entrar",
     "subtitle": "Acesse o acompanhamento de visitantes",
+    "name": "Nome",
     "email": "E-mail",
     "password": "Senha",
     "signIn": "Entrar",
-    "error": "Não foi possível entrar. Verifique seus dados."
+    "createAccount": "Criar conta",
+    "noAccount": "Não tem conta? Criar uma",
+    "haveAccount": "Já tem conta? Entrar",
+    "checkEmail": "Confira seu e-mail para confirmar a conta.",
+    "error": "Não foi possível continuar. Verifique seus dados."
   },
   "today": {
     "title": "Hoje",

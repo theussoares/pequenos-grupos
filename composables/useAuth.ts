@@ -3,6 +3,11 @@
  */
 import { toErrorMessage } from '~/camadas/core/utils/error'
 
+export interface SignUpResult {
+  ok: boolean
+  needsConfirmation: boolean
+}
+
 export function useAuth() {
   const supabase = useSupabaseClient()
   const isSubmitting = ref(false)
@@ -32,9 +37,35 @@ export function useAuth() {
     }
   }
 
+  async function signUp(
+    email: string,
+    password: string,
+    nome: string
+  ): Promise<SignUpResult> {
+    isSubmitting.value = true
+    error.value = null
+    try {
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { nome } }
+      })
+      if (signUpError) {
+        error.value = signUpError.message
+        return { ok: false, needsConfirmation: false }
+      }
+      return { ok: true, needsConfirmation: data.session === null }
+    } catch (caught) {
+      error.value = toErrorMessage(caught)
+      return { ok: false, needsConfirmation: false }
+    } finally {
+      isSubmitting.value = false
+    }
+  }
+
   async function signOut(): Promise<void> {
     await supabase.auth.signOut()
   }
 
-  return { isSubmitting, error, signInWithPassword, signOut }
+  return { isSubmitting, error, signInWithPassword, signUp, signOut }
 }

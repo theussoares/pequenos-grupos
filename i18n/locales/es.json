@@ -61,10 +61,15 @@
   "auth": {
     "title": "Entrar",
     "subtitle": "Accede al seguimiento de visitantes",
+    "name": "Nombre",
     "email": "Correo",
     "password": "Contraseña",
     "signIn": "Entrar",
-    "error": "No se pudo entrar. Verifica tus datos."
+    "createAccount": "Crear cuenta",
+    "noAccount": "¿No tienes cuenta? Crear una",
+    "haveAccount": "¿Ya tienes cuenta? Entrar",
+    "checkEmail": "Revisa tu correo para confirmar la cuenta.",
+    "error": "No se pudo continuar. Verifica tus datos."
   },
   "today": {
     "title": "Hoy",

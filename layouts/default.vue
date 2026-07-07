@@ -8,6 +8,7 @@ const { loadProfile } = useCurrentProfile()
 const store = useVisitorsStore()
 const { isPadrinho, isRecepcionista, isAdmin } = storeToRefs(store)
 const router = useRouter()
+const route = useRoute()
 
 interface NavItem {
   to: string
@@ -44,8 +45,12 @@ const navItems = computed<NavItem[]>(() => {
 
 watch(
   user,
-  (value) => {
-    if (value) loadProfile()
+  async (value) => {
+    if (!value) return
+    await loadProfile()
+    if (isRecepcionista.value && route.path === '/hoje') {
+      await router.push('/recepcao')
+    }
   },
   { immediate: true }
 )

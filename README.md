@@ -51,8 +51,23 @@ Aplique as migrations de `supabase/migrations/` no seu projeto (via Supabase CLI
 `supabase db push`, ou colando o SQL no editor do painel, na ordem numérica).
 Opcionalmente rode `supabase/seed.sql` para popular PGs e visitantes de exemplo.
 
-Cada usuário do painel precisa de uma linha em `profiles` (com `role`
-`admin` / `lider` / `padrinho` / `recepcionista`) vinculada ao seu `auth.users.id`.
+### Contas e papéis
+
+A tela de login tem cadastro de conta ("Criar conta"). Ao criar a conta, o
+trigger `handle_new_user` (migration 0005) cria automaticamente uma linha em
+`profiles` com o papel padrão **`recepcionista`** — por isso o novo usuário já
+enxerga a navegação para a Recepção.
+
+Para promover o primeiro **admin** (que vê Hoje, Funil, Métricas e Recepção),
+rode uma vez no SQL editor:
+
+```sql
+update profiles set role = 'admin'
+where id = (select id from auth.users where email = 'voce@exemplo.com');
+```
+
+Papéis disponíveis: `admin` · `lider` · `padrinho` · `recepcionista`.
+A navegação e o RLS se ajustam ao papel de cada `profiles.role`.
 
 ## Scripts
 
