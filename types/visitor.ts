@@ -7,7 +7,8 @@ export interface Visitor {
   telefone: string | null
   idade: number | null
   dataPrimeiraVisita: string
-  comoConheceu: string | null
+  bairro: string | null
+  pontoReferencia: string | null
   observacoes: string | null
   status: VisitorStatus
   pgId: string | null
@@ -43,6 +44,5 @@ export interface BoardCard {
 export interface RegisteredVisitorSummary {
   nome: string
   telefone: string | null
-  comoConheceu: string | null
   registeredAt: string
 }

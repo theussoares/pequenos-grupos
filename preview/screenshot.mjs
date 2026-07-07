@@ -71,10 +71,26 @@ await page.goto(`${BASE}/metricas`, { waitUntil: 'networkidle' })
 await page.waitForSelector('text=Funil do mês')
 await shot('7-metricas')
 
-// 8. Recepção
+// 8. Recepção (form novo: telefone com máscara, idade 2 dígitos, bairro/PR)
 await page.goto(`${BASE}/recepcao`, { waitUntil: 'networkidle' })
 await page.waitForSelector('text=Cadastro rápido')
+await page.locator('input[placeholder="Nome do visitante"]').fill('Teste Preview')
+await page.locator('input[inputmode=numeric][type=tel]').fill('11988887777')
+await page.locator('input[maxlength="2"]').fill('185')
+await page.locator('input[placeholder="Ex.: Centro"]').fill('Centro')
+await page
+  .locator('input[placeholder="Ex.: perto do mercado"]')
+  .fill('perto do mercado')
 await shot('8-recepcao')
+
+// 9. Gestão de PGs (lista + designação de líder)
+await page.goto(`${BASE}/pgs`, { waitUntil: 'networkidle' })
+await page.waitForSelector('text=PG Central')
+await shot('9-pgs')
+
+// 10. Gestão de PGs — formulário de novo PG aberto
+await page.getByRole('button', { name: 'Novo PG' }).click()
+await shot('10-pgs-novo')
 
 await browser.close()
 console.log('[preview] done →', OUT)

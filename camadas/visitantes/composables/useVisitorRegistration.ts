@@ -40,7 +40,8 @@ export function useVisitorRegistration() {
         nome: parsed.data.nome,
         telefone: parsed.data.telefone ?? null,
         idade: parsed.data.idade ?? null,
-        como_conheceu: parsed.data.comoConheceu ?? null,
+        bairro: parsed.data.bairro ?? null,
+        ponto_referencia: parsed.data.pontoReferencia ?? null,
         status: 'novo',
         cadastrado_por: currentUserId.value,
         proximo_contato_em: deadline ? deadline.toISOString() : null
@@ -49,7 +50,6 @@ export function useVisitorRegistration() {
         {
           nome: parsed.data.nome,
           telefone: parsed.data.telefone ?? null,
-          comoConheceu: parsed.data.comoConheceu ?? null,
           registeredAt: now.toISOString()
         },
         ...recentlyAdded.value

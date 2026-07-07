@@ -37,6 +37,7 @@ const navItems = computed<NavItem[]>(() => {
   if (isAdmin.value) {
     items.push(
       { to: '/metricas', label: t('nav.metricas'), icon: 'lucide:chart-column' },
+      { to: '/pgs', label: t('nav.pgs'), icon: 'lucide:house' },
       RECEPTION_ITEM
     )
   }

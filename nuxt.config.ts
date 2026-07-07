@@ -16,7 +16,8 @@ export default defineNuxtConfig({
 
   components: [
     { path: '~/camadas/ui/components', pathPrefix: false },
-    { path: '~/camadas/visitantes/components', pathPrefix: false }
+    { path: '~/camadas/visitantes/components', pathPrefix: false },
+    { path: '~/camadas/pgs/components', pathPrefix: false }
   ],
 
   imports: {

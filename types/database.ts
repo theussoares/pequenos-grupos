@@ -13,7 +13,8 @@ export type VisitorRow = {
   telefone: string | null
   idade: number | null
   data_primeira_visita: string
-  como_conheceu: string | null
+  bairro: string | null
+  ponto_referencia: string | null
   observacoes: string | null
   status: string
   pg_id: string | null

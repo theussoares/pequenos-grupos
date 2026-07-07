@@ -4,6 +4,7 @@
   },
   "common": {
     "save": "Salvar",
+    "cancel": "Cancelar",
     "retry": "Tentar de novo",
     "back": "Voltar",
     "loading": "Carregando…"
@@ -14,7 +15,24 @@
     "afilhados": "Meu afilhado",
     "recepcao": "Recepção",
     "metricas": "Métricas",
+    "pgs": "Grupos",
     "logout": "Sair"
+  },
+  "pgs": {
+    "title": "Grupos",
+    "subtitle": "PGs, horários e líderes",
+    "newPg": "Novo PG",
+    "create": "Criar PG",
+    "name": "Nome",
+    "weekday": "Dia da semana",
+    "time": "Horário",
+    "address": "Endereço",
+    "leader": "Líder",
+    "selectLeader": "Selecionar líder",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "inactiveSection": "Inativos",
+    "empty": "Nenhum PG cadastrado"
   },
   "metrics": {
     "title": "Métricas",
@@ -50,10 +68,12 @@
     "name": "Nome",
     "namePlaceholder": "Nome do visitante",
     "phone": "Telefone",
-    "phonePlaceholder": "(11) 90000-0000",
+    "phonePlaceholder": "(11) 9 00000000",
     "age": "Idade",
-    "howMet": "Como conheceu",
-    "howMetPlaceholder": "Amigo, evento, redes…",
+    "bairro": "Bairro",
+    "bairroPlaceholder": "Ex.: Centro",
+    "pontoReferencia": "Ponto de referência",
+    "pontoReferenciaPlaceholder": "Ex.: perto do mercado",
     "submit": "Cadastrar visitante",
     "invalid": "Preencha ao menos o nome.",
     "recentTitle": "Cadastrados agora"

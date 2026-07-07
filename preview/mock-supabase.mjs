@@ -8,6 +8,7 @@
  *   MOCK_LOG   se definido, loga cada requisição
  */
 import http from 'node:http'
+import { randomUUID } from 'node:crypto'
 
 const PORT = Number(process.env.MOCK_PORT ?? 9999)
 const LOG = Boolean(process.env.MOCK_LOG)
@@ -41,7 +42,8 @@ function visitor(id, nome, status, opts = {}) {
     telefone: opts.telefone ?? '11988887777',
     idade: opts.idade ?? 20,
     data_primeira_visita: opts.first ?? day(now - 10 * D),
-    como_conheceu: opts.como ?? 'Amigo da escola',
+    bairro: opts.bairro ?? 'Centro',
+    ponto_referencia: opts.pontoReferencia ?? 'perto do mercado',
     observacoes: null,
     status,
     pg_id: opts.pg ?? PG1,
@@ -173,7 +175,23 @@ const server = http.createServer((req, res) => {
         rows.forEach((r) => Object.assign(r, payload))
         return wantsObject && rows.length ? send(200, rows[0]) : send(200, rows)
       }
-      return send(201, Array.isArray(payload) ? payload : [payload])
+      // POST: insere de fato na tabela em memória, com defaults de id/timestamps,
+      // para refletir corretamente em GETs seguintes (essencial para telas de
+      // gestão como /pgs, que recarregam a lista após criar um item).
+      const rowsToInsert = Array.isArray(payload) ? payload : [payload]
+      const inserted = rowsToInsert.map((row) => {
+        const createdAt = row.created_at ?? new Date().toISOString()
+        const full = {
+          id: row.id ?? randomUUID(),
+          created_at: createdAt,
+          updated_at: row.updated_at ?? createdAt,
+          status_changed_at: row.status_changed_at ?? createdAt,
+          ...row
+        }
+        table.push(full)
+        return full
+      })
+      return wantsObject ? send(201, inserted[0]) : send(201, inserted)
     })
     return
   }

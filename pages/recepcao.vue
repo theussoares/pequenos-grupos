@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { formatRelativeToNow } from '~/camadas/core/utils/date'
+import { maskPhone } from '~/camadas/visitantes/domain/phone-mask'
 
 const { t, locale } = useI18n()
 const { register, isSubmitting, error, recentlyAdded } = useVisitorRegistration()
@@ -9,8 +10,9 @@ const INPUT_CLASS =
 
 const nome = ref('')
 const telefone = ref('')
-const idade = ref<number | null>(null)
-const comoConheceu = ref('')
+const idade = ref('')
+const bairro = ref('')
+const pontoReferencia = ref('')
 const nameInput = ref<HTMLInputElement | null>(null)
 
 const now = ref(new Date())
@@ -18,20 +20,29 @@ const now = ref(new Date())
 function reset() {
   nome.value = ''
   telefone.value = ''
-  idade.value = null
-  comoConheceu.value = ''
+  idade.value = ''
+  bairro.value = ''
+  pontoReferencia.value = ''
   nameInput.value?.focus()
+}
+
+function onPhoneInput(event: Event) {
+  telefone.value = maskPhone((event.target as HTMLInputElement).value)
+}
+
+function onIdadeInput(event: Event) {
+  idade.value = (event.target as HTMLInputElement).value
+    .replace(/\D/g, '')
+    .slice(0, 2)
 }
 
 async function onSubmit() {
   const ok = await register({
     nome: nome.value,
-    telefone: telefone.value.trim() || undefined,
-    idade:
-      typeof idade.value === 'number' && !Number.isNaN(idade.value)
-        ? idade.value
-        : undefined,
-    comoConheceu: comoConheceu.value.trim() || undefined
+    telefone: telefone.value || undefined,
+    idade: idade.value ? Number(idade.value) : undefined,
+    bairro: bairro.value.trim() || undefined,
+    pontoReferencia: pontoReferencia.value.trim() || undefined
   })
   if (ok) reset()
 }
@@ -61,29 +72,44 @@ async function onSubmit() {
           >
         </label>
 
-        <div class="grid grid-cols-2 gap-3">
-          <label class="block">
-            <span class="mb-1 block text-sm font-medium text-text">
-              {{ t('reception.phone') }}
-            </span>
-            <input
-              v-model="telefone"
-              type="tel"
-              inputmode="tel"
-              :placeholder="t('reception.phonePlaceholder')"
-              :class="INPUT_CLASS"
-            >
-          </label>
+        <label class="block">
+          <span class="mb-1 block text-sm font-medium text-text">
+            {{ t('reception.phone') }}
+          </span>
+          <input
+            :value="telefone"
+            type="tel"
+            inputmode="numeric"
+            :placeholder="t('reception.phonePlaceholder')"
+            :class="INPUT_CLASS"
+            @input="onPhoneInput"
+          >
+        </label>
+
+        <div class="grid grid-cols-[5rem_1fr] gap-3">
           <label class="block">
             <span class="mb-1 block text-sm font-medium text-text">
               {{ t('reception.age') }}
             </span>
             <input
-              v-model.number="idade"
-              type="number"
+              :value="idade"
+              type="text"
               inputmode="numeric"
-              min="1"
-              max="120"
+              pattern="[0-9]*"
+              maxlength="2"
+              placeholder="18"
+              :class="INPUT_CLASS"
+              @input="onIdadeInput"
+            >
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-text">
+              {{ t('reception.bairro') }}
+            </span>
+            <input
+              v-model="bairro"
+              type="text"
+              :placeholder="t('reception.bairroPlaceholder')"
               :class="INPUT_CLASS"
             >
           </label>
@@ -91,12 +117,12 @@ async function onSubmit() {
 
         <label class="block">
           <span class="mb-1 block text-sm font-medium text-text">
-            {{ t('reception.howMet') }}
+            {{ t('reception.pontoReferencia') }}
           </span>
           <input
-            v-model="comoConheceu"
+            v-model="pontoReferencia"
             type="text"
-            :placeholder="t('reception.howMetPlaceholder')"
+            :placeholder="t('reception.pontoReferenciaPlaceholder')"
             :class="INPUT_CLASS"
           >
         </label>
