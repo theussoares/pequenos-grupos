@@ -1,17 +1,32 @@
 <script setup lang="ts">
+import { SIGNUP_ROLES, type SignupRole } from '~/composables/useAuth'
+
 const { t } = useI18n()
 const { isSubmitting, error, signInWithPassword, signUp } = useAuth()
 
 const INPUT_CLASS =
   'w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40'
 
+const ROLE_ICONS: Record<SignupRole, string> = {
+  recepcionista: 'lucide:user-plus',
+  lider: 'lucide:users',
+  padrinho: 'lucide:heart-handshake'
+}
+
 const mode = ref<'signin' | 'signup'>('signin')
 const nome = ref('')
 const email = ref('')
 const password = ref('')
+const role = ref<SignupRole>('recepcionista')
 const info = ref<string | null>(null)
 
 const isSignup = computed(() => mode.value === 'signup')
+
+const landingByRole: Record<SignupRole, string> = {
+  recepcionista: '/recepcao',
+  lider: '/kanban',
+  padrinho: '/meu-afilhado'
+}
 
 function toggleMode() {
   mode.value = isSignup.value ? 'signin' : 'signup'
@@ -21,13 +36,18 @@ function toggleMode() {
 async function onSubmit() {
   info.value = null
   if (isSignup.value) {
-    const result = await signUp(email.value, password.value, nome.value)
+    const result = await signUp(
+      email.value,
+      password.value,
+      nome.value,
+      role.value
+    )
     if (!result.ok) return
     if (result.needsConfirmation) {
       info.value = t('auth.checkEmail')
       return
     }
-    await navigateTo('/hoje')
+    await navigateTo(landingByRole[role.value])
     return
   }
 
@@ -84,6 +104,42 @@ async function onSubmit() {
             :class="INPUT_CLASS"
           >
         </label>
+
+        <fieldset v-if="isSignup">
+          <legend class="mb-1 text-sm font-medium text-text">
+            {{ t('auth.role') }}
+          </legend>
+          <div class="space-y-2">
+            <label
+              v-for="option in SIGNUP_ROLES"
+              :key="option"
+              class="flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 transition"
+              :class="
+                role === option
+                  ? 'border-primary bg-primary/10'
+                  : 'border-border bg-surface hover:bg-surface-muted'
+              "
+            >
+              <input
+                v-model="role"
+                type="radio"
+                name="role"
+                :value="option"
+                class="h-4 w-4 border-border text-primary focus:ring-primary/40"
+              >
+              <Icon :name="ROLE_ICONS[option]" class="text-text-muted" />
+              <span class="flex-1">
+                <span class="block text-sm font-medium text-text">
+                  {{ t(`auth.roles.${option}.label`) }}
+                </span>
+                <span class="block text-xs text-text-muted">
+                  {{ t(`auth.roles.${option}.hint`) }}
+                </span>
+              </span>
+            </label>
+          </div>
+          <p class="mt-1 text-xs text-text-muted">{{ t('auth.adminNote') }}</p>
+        </fieldset>
 
         <p v-if="error" class="text-sm text-danger">{{ t('auth.error') }}</p>
         <p v-if="info" class="text-sm text-success">{{ info }}</p>

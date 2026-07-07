@@ -69,7 +69,23 @@
     "noAccount": "Não tem conta? Criar uma",
     "haveAccount": "Já tem conta? Entrar",
     "checkEmail": "Confira seu e-mail para confirmar a conta.",
-    "error": "Não foi possível continuar. Verifique seus dados."
+    "error": "Não foi possível continuar. Verifique seus dados.",
+    "role": "Qual é o seu papel?",
+    "adminNote": "Administrador é definido manualmente pela coordenação.",
+    "roles": {
+      "recepcionista": {
+        "label": "Recepção",
+        "hint": "Cadastra visitantes no sábado"
+      },
+      "lider": {
+        "label": "Líder de PG",
+        "hint": "Acompanha os visitantes do seu PG"
+      },
+      "padrinho": {
+        "label": "Padrinho / Madrinha",
+        "hint": "Acompanha seu afilhado por 30 dias"
+      }
+    }
   },
   "today": {
     "title": "Hoje",

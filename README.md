@@ -53,10 +53,11 @@ Opcionalmente rode `supabase/seed.sql` para popular PGs e visitantes de exemplo.
 
 ### Contas e papéis
 
-A tela de login tem cadastro de conta ("Criar conta"). Ao criar a conta, o
-trigger `handle_new_user` (migration 0005) cria automaticamente uma linha em
-`profiles` com o papel padrão **`recepcionista`** — por isso o novo usuário já
-enxerga a navegação para a Recepção.
+A tela de login tem cadastro de conta ("Criar conta") com **seleção de papel**:
+Recepção, Líder de PG ou Padrinho/Madrinha. O trigger `handle_new_user`
+(migrations 0005/0006) valida o papel contra uma whitelist e cria a linha em
+`profiles` — `admin` nunca é aceito via cadastro. A navegação se ajusta ao
+papel logo após o login.
 
 Para promover o primeiro **admin** (que vê Hoje, Funil, Métricas e Recepção),
 rode uma vez no SQL editor:

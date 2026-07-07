@@ -3,6 +3,11 @@
  */
 import { toErrorMessage } from '~/camadas/core/utils/error'
 
+/** Papéis que podem ser escolhidos no cadastro — admin só por SQL. */
+export const SIGNUP_ROLES = ['recepcionista', 'lider', 'padrinho'] as const
+
+export type SignupRole = (typeof SIGNUP_ROLES)[number]
+
 export interface SignUpResult {
   ok: boolean
   needsConfirmation: boolean
@@ -40,7 +45,8 @@ export function useAuth() {
   async function signUp(
     email: string,
     password: string,
-    nome: string
+    nome: string,
+    role: SignupRole
   ): Promise<SignUpResult> {
     isSubmitting.value = true
     error.value = null
@@ -48,7 +54,7 @@ export function useAuth() {
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
-        options: { data: { nome } }
+        options: { data: { nome, role } }
       })
       if (signUpError) {
         error.value = signUpError.message
