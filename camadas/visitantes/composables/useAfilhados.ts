@@ -7,15 +7,15 @@ import { toErrorMessage } from '~/camadas/core/utils/error'
 export function useAfilhados() {
   const store = useVisitorsStore()
   const repository = useVisitorsRepository()
-  const user = useSupabaseUser()
+  const currentUserId = useCurrentUserId()
 
   async function loadAfilhados(): Promise<void> {
-    if (!user.value) return
+    if (!currentUserId.value) return
     store.setLoading(true)
     store.setError(null)
     try {
       const [afilhados, pgs] = await Promise.all([
-        repository.fetchAfilhados(user.value.id),
+        repository.fetchAfilhados(currentUserId.value),
         repository.fetchPgs()
       ])
       store.setAfilhados(afilhados)

@@ -6,12 +6,15 @@ const props = defineProps<{ points: MonthlyPoint[] }>()
 
 const { t, locale } = useI18n()
 
+const BAR_AREA_PX = 96
+
 const maxCount = computed(() =>
   Math.max(1, ...props.points.map((point) => point.count))
 )
 
-function heightPercent(count: number): number {
-  return Math.round((count / maxCount.value) * 100)
+function barHeightPx(count: number): number {
+  if (count === 0) return 2
+  return Math.max(6, Math.round((count / maxCount.value) * BAR_AREA_PX))
 }
 </script>
 
@@ -20,19 +23,17 @@ function heightPercent(count: number): number {
     <h2 class="mb-3 text-sm font-semibold text-text">
       {{ t('metrics.trendTitle') }}
     </h2>
-    <div class="flex items-end gap-2" style="height: 8rem">
+    <div class="flex items-end gap-2">
       <div
         v-for="point in points"
         :key="point.month"
-        class="flex flex-1 flex-col items-center gap-1"
+        class="flex flex-1 flex-col items-center justify-end gap-1"
       >
         <span class="text-xs font-medium text-text-muted">{{ point.count }}</span>
-        <div class="flex w-full flex-1 items-end">
-          <div
-            class="w-full rounded-t-md bg-primary/70"
-            :style="{ height: `${heightPercent(point.count)}%` }"
-          />
-        </div>
+        <div
+          class="w-full rounded-t-md bg-primary/70"
+          :style="{ height: `${barHeightPx(point.count)}px` }"
+        />
         <span class="text-xs capitalize text-text-muted">
           {{ formatMonthKey(point.month, locale) }}
         </span>

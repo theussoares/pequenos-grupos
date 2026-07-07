@@ -14,7 +14,7 @@ import { toErrorMessage } from '~/camadas/core/utils/error'
 
 export function useVisitorRegistration() {
   const repository = useVisitorsRepository()
-  const user = useSupabaseUser()
+  const currentUserId = useCurrentUserId()
 
   const isSubmitting = ref(false)
   const error = ref<string | null>(null)
@@ -42,7 +42,7 @@ export function useVisitorRegistration() {
         idade: parsed.data.idade ?? null,
         como_conheceu: parsed.data.comoConheceu ?? null,
         status: 'novo',
-        cadastrado_por: user.value?.id ?? null,
+        cadastrado_por: currentUserId.value,
         proximo_contato_em: deadline ? deadline.toISOString() : null
       })
       recentlyAdded.value = [

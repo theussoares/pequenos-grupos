@@ -14,9 +14,9 @@ import { toErrorMessage } from '~/camadas/core/utils/error'
 export function useVisitorActions() {
   const store = useVisitorsStore()
   const repository = useVisitorsRepository()
-  const user = useSupabaseUser()
+  const currentUserId = useCurrentUserId()
 
-  const authorId = (): string | null => user.value?.id ?? null
+  const authorId = (): string | null => currentUserId.value
 
   async function persistPatch(
     visitor: Visitor,

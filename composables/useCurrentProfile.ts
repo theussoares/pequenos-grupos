@@ -7,13 +7,13 @@ import { toErrorMessage } from '~/camadas/core/utils/error'
 export function useCurrentProfile() {
   const store = useVisitorsStore()
   const repository = useVisitorsRepository()
-  const user = useSupabaseUser()
+  const currentUserId = useCurrentUserId()
 
   async function loadProfile(): Promise<void> {
-    if (!user.value) return
+    if (!currentUserId.value) return
     try {
       store.setCurrentProfile(
-        await repository.fetchCurrentProfile(user.value.id)
+        await repository.fetchCurrentProfile(currentUserId.value)
       )
     } catch (error) {
       store.setError(toErrorMessage(error))
