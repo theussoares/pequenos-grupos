@@ -13,6 +13,19 @@ export interface SignUpResult {
   needsConfirmation: boolean
 }
 
+/**
+ * Por proteção contra enumeração de e-mail, o Supabase responde ao signUp de um
+ * e-mail já cadastrado sem erro — mas devolve `identities: []`. Sem checar isso,
+ * uma segunda tentativa (ex.: escolhendo outro papel) parece funcionar mas não
+ * cria nem atualiza nada.
+ */
+export function isAlreadyRegistered(
+  user: { identities?: unknown[] | null } | null
+): boolean {
+  const identities = user?.identities
+  return Array.isArray(identities) && identities.length === 0
+}
+
 export function useAuth() {
   const supabase = useSupabaseClient()
   const isSubmitting = ref(false)
@@ -58,6 +71,10 @@ export function useAuth() {
       })
       if (signUpError) {
         error.value = signUpError.message
+        return { ok: false, needsConfirmation: false }
+      }
+      if (isAlreadyRegistered(data.user)) {
+        error.value = 'already_registered'
         return { ok: false, needsConfirmation: false }
       }
       return { ok: true, needsConfirmation: data.session === null }

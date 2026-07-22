@@ -141,7 +141,9 @@ async function onSubmit() {
           <p class="mt-1 text-xs text-text-muted">{{ t('auth.adminNote') }}</p>
         </fieldset>
 
-        <p v-if="error" class="text-sm text-danger">{{ t('auth.error') }}</p>
+        <p v-if="error" class="text-sm text-danger">
+          {{ error === 'already_registered' ? t('auth.alreadyRegistered') : error }}
+        </p>
         <p v-if="info" class="text-sm text-success">{{ info }}</p>
 
         <BaseButton block type="submit" :loading="isSubmitting">
