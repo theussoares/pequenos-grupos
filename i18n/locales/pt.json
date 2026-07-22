@@ -16,7 +16,14 @@
     "recepcao": "Recepção",
     "metricas": "Métricas",
     "pgs": "Grupos",
+    "meuPg": "Meu PG",
     "logout": "Sair"
+  },
+  "meuPg": {
+    "title": "Meu PG",
+    "noPg": "Você ainda não lidera um PG",
+    "noPgDescription": "Fale com a coordenação para ser designado a um grupo.",
+    "empty": "Nenhum visitante neste PG ainda"
   },
   "pgs": {
     "title": "Grupos",

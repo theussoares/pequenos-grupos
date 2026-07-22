@@ -9,6 +9,7 @@ defineProps<{
   options: SelectOption[]
   placeholder?: string
   label?: string
+  disabled?: boolean
 }>()
 
 const emit = defineEmits<{ 'update:modelValue': [value: string | null] }>()
@@ -29,7 +30,8 @@ function onChange(event: Event) {
     </span>
     <select
       :value="modelValue ?? ''"
-      class="w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      :disabled="disabled"
+      class="w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:opacity-50"
       @change="onChange"
     >
       <option v-if="placeholder" value="">{{ placeholder }}</option>

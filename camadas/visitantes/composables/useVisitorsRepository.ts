@@ -67,6 +67,17 @@ export function useVisitorsRepository() {
     return (data as VisitorRow[]).map(toVisitor)
   }
 
+  async function fetchByPg(pgId: string): Promise<Visitor[]> {
+    const { data, error } = await supabase
+      .from('visitantes')
+      .select('*')
+      .eq('pg_id', pgId)
+      .neq('status', 'arquivado')
+      .order('nome')
+    if (error) throw error
+    return (data as VisitorRow[]).map(toVisitor)
+  }
+
   async function fetchAfilhados(padrinhoId: string): Promise<Visitor[]> {
     const { data, error } = await supabase
       .from('visitantes')
@@ -163,6 +174,7 @@ export function useVisitorsRepository() {
     fetchQueue,
     fetchBoard,
     fetchAllVisitors,
+    fetchByPg,
     fetchAfilhados,
     fetchCurrentProfile,
     fetchVisitor,

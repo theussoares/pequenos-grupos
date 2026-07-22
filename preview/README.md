@@ -39,15 +39,23 @@ node preview/screenshot.mjs
 ```
 
 Para navegar manualmente no preview, abra `http://localhost:3000` — o login
-aceita qualquer e-mail/senha (o mock sempre devolve a sessão do admin de
-exemplo).
+aceita qualquer e-mail/senha (o mock sempre devolve a sessão do perfil
+escolhido em `MOCK_USER`, admin por padrão).
+
+### Ver a UI por papel
+
+```bash
+MOCK_USER=lider node preview/mock-supabase.mjs      # sessão da Carla (líder)
+MOCK_USER=padrinho node preview/mock-supabase.mjs   # sessão da Ana (padrinho)
+```
 
 ## Variáveis de ambiente
 
 | Var         | Onde            | Padrão                  |
-| ----------- | --------------- | ----------------------- |
+| ----------- | --------------- | ------------------------ |
 | `APP_PORT`  | run.mjs         | `3000`                  |
 | `MOCK_PORT` | mock/run.mjs    | `9999`                  |
+| `MOCK_USER` | mock            | `admin` (ou `padrinho`, `lider`) |
 | `BASE_URL`  | screenshot.mjs  | `http://localhost:3000` |
 | `OUT_DIR`   | screenshot.mjs  | `preview/shots`         |
 | `MOCK_LOG`  | run/mock        | (desligado)             |

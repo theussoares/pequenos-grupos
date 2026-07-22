@@ -6,6 +6,8 @@
  * Env:
  *   MOCK_PORT  porta (padrão 9999)
  *   MOCK_LOG   se definido, loga cada requisição
+ *   MOCK_USER  qual perfil de exemplo autentica a sessão: admin (padrão),
+ *              padrinho ou lider — útil para inspecionar a UI por papel.
  */
 import http from 'node:http'
 import { randomUUID } from 'node:crypto'
@@ -36,6 +38,13 @@ const pgs = [
   { id: PG2, nome: 'PG Zona Sul', dia_semana: 2, horario: '20:00:00', endereco: null, lider_id: CARLA, ativo: true, created_at: iso(now - 180 * D) }
 ]
 
+// `??` trata null explícito como "sem valor" e cairia no default — mas aqui
+// `pg: null`/`padrinho: null` são intencionais (visitante sem PG/padrinho
+// ainda). Só usa o default quando a opção nem foi passada (undefined).
+function withDefault(value, fallback) {
+  return value !== undefined ? value : fallback
+}
+
 function visitor(id, nome, status, opts = {}) {
   return {
     id, nome,
@@ -46,8 +55,8 @@ function visitor(id, nome, status, opts = {}) {
     ponto_referencia: opts.pontoReferencia ?? 'perto do mercado',
     observacoes: null,
     status,
-    pg_id: opts.pg ?? PG1,
-    padrinho_id: opts.padrinho ?? ANA,
+    pg_id: withDefault(opts.pg, PG1),
+    padrinho_id: withDefault(opts.padrinho, ANA),
     cadastrado_por: UID,
     proximo_contato_em: opts.deadline ?? null,
     ultimo_contato_em: opts.last ?? iso(now - 2 * D),
@@ -82,6 +91,11 @@ const interacoes = [
 
 const tables = { profiles, pgs, visitantes, interacoes, presencas_pg: [] }
 
+const SESSION_PROFILE_BY_MOCK_USER = { admin: UID, padrinho: ANA, lider: CARLA }
+const sessionProfile = profiles.find(
+  (p) => p.id === (SESSION_PROFILE_BY_MOCK_USER[process.env.MOCK_USER] ?? UID)
+)
+
 function applyFilters(rows, params) {
   let out = rows
   for (const [key, raw] of params.entries()) {
@@ -113,10 +127,11 @@ function applyOrder(rows, params) {
 }
 
 // JWT de mock (não assinado de verdade): o identificador vive em `sub`.
+const sessionEmail = `${sessionProfile.nome.toLowerCase()}@igreja.com`
 const b64url = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url')
 const jwt = [
   b64url({ alg: 'HS256', typ: 'JWT' }),
-  b64url({ sub: UID, role: 'authenticated', email: 'matheus@igreja.com', exp: Math.floor(now / 1000) + 86400 * 30, aud: 'authenticated', session_id: 'mock-session' }),
+  b64url({ sub: sessionProfile.id, role: 'authenticated', email: sessionEmail, exp: Math.floor(now / 1000) + 86400 * 30, aud: 'authenticated', session_id: 'mock-session' }),
   Buffer.from('mock-signature').toString('base64url')
 ].join('.')
 
@@ -127,10 +142,10 @@ const session = {
   expires_at: Math.floor(now / 1000) + 86400 * 30,
   refresh_token: 'mock-refresh-token',
   user: {
-    id: UID, aud: 'authenticated', role: 'authenticated', email: 'matheus@igreja.com',
+    id: sessionProfile.id, aud: 'authenticated', role: 'authenticated', email: sessionEmail,
     email_confirmed_at: iso(now - 90 * D), phone: '', confirmed_at: iso(now - 90 * D),
     last_sign_in_at: iso(now), app_metadata: { provider: 'email', providers: ['email'] },
-    user_metadata: { nome: 'Matheus' }, identities: [], created_at: iso(now - 90 * D), updated_at: iso(now)
+    user_metadata: { nome: sessionProfile.nome }, identities: [], created_at: iso(now - 90 * D), updated_at: iso(now)
   }
 }
 

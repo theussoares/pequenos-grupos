@@ -6,7 +6,7 @@ const user = useSupabaseUser()
 const { signOut } = useAuth()
 const { loadProfile } = useCurrentProfile()
 const store = useVisitorsStore()
-const { isPadrinho, isRecepcionista, isAdmin } = storeToRefs(store)
+const { isPadrinho, isRecepcionista, isLider, isAdmin } = storeToRefs(store)
 const router = useRouter()
 const route = useRoute()
 
@@ -34,6 +34,12 @@ const navItems = computed<NavItem[]>(() => {
     { to: '/hoje', label: t('nav.today'), icon: 'lucide:list-checks' },
     { to: '/kanban', label: t('nav.kanban'), icon: 'lucide:columns-3' }
   ]
+  if (isLider.value) {
+    items.push(
+      { to: '/meu-pg', label: t('nav.meuPg'), icon: 'lucide:house' },
+      RECEPTION_ITEM
+    )
+  }
   if (isAdmin.value) {
     items.push(
       { to: '/metricas', label: t('nav.metricas'), icon: 'lucide:chart-column' },

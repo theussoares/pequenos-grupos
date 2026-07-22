@@ -16,6 +16,16 @@ export function usePgsRepository() {
     return (data as PgRow[]).map(toPg)
   }
 
+  async function fetchOne(id: string): Promise<Pg | null> {
+    const { data, error } = await supabase
+      .from('pgs')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle()
+    if (error) throw error
+    return data ? toPg(data as PgRow) : null
+  }
+
   async function fetchLeaderCandidates(): Promise<Profile[]> {
     const { data, error } = await supabase
       .from('profiles')
@@ -58,5 +68,12 @@ export function usePgsRepository() {
     if (error) throw error
   }
 
-  return { fetchAll, fetchLeaderCandidates, insert, update, updateProfilePg }
+  return {
+    fetchAll,
+    fetchOne,
+    fetchLeaderCandidates,
+    insert,
+    update,
+    updateProfilePg
+  }
 }

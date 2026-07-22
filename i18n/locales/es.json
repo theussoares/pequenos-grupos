@@ -16,7 +16,14 @@
     "recepcao": "Recepción",
     "metricas": "Métricas",
     "pgs": "Grupos",
+    "meuPg": "Mi PG",
     "logout": "Salir"
+  },
+  "meuPg": {
+    "title": "Mi PG",
+    "noPg": "Aún no lideras un PG",
+    "noPgDescription": "Habla con la coordinación para que te asignen un grupo.",
+    "empty": "Ningún visitante en este PG todavía"
   },
   "pgs": {
     "title": "Grupos",
