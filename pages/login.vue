@@ -142,7 +142,7 @@ async function onSubmit() {
         </fieldset>
 
         <p v-if="error" class="text-sm text-danger">
-          {{ error === 'already_registered' ? t('auth.alreadyRegistered') : error }}
+          {{ t(`auth.errors.${error}`) }}
         </p>
         <p v-if="info" class="text-sm text-success">{{ info }}</p>
 

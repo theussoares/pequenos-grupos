@@ -1,7 +1,7 @@
 /**
  * Autenticação via Supabase. Responsabilidade única: sessão do usuário.
  */
-import { toErrorMessage } from '~/camadas/core/utils/error'
+import { mapAuthError, type AuthErrorKey } from '~/camadas/core/utils/auth-error'
 
 /** Papéis que podem ser escolhidos no cadastro — admin só por SQL. */
 export const SIGNUP_ROLES = ['recepcionista', 'lider', 'padrinho'] as const
@@ -29,7 +29,12 @@ export function isAlreadyRegistered(
 export function useAuth() {
   const supabase = useSupabaseClient()
   const isSubmitting = ref(false)
-  const error = ref<string | null>(null)
+  const error = ref<AuthErrorKey | null>(null)
+
+  /** Loga o erro técnico original no console (diagnóstico) sem expor na UI. */
+  function logAuthError(context: string, raw: unknown): void {
+    console.error(`[auth:${context}]`, raw)
+  }
 
   async function signInWithPassword(
     email: string,
@@ -43,12 +48,14 @@ export function useAuth() {
         password
       })
       if (signInError) {
-        error.value = signInError.message
+        logAuthError('signIn', signInError)
+        error.value = mapAuthError(signInError)
         return false
       }
       return true
     } catch (caught) {
-      error.value = toErrorMessage(caught)
+      logAuthError('signIn', caught)
+      error.value = 'generic'
       return false
     } finally {
       isSubmitting.value = false
@@ -70,16 +77,19 @@ export function useAuth() {
         options: { data: { nome, role } }
       })
       if (signUpError) {
-        error.value = signUpError.message
+        logAuthError('signUp', signUpError)
+        error.value = mapAuthError(signUpError)
         return { ok: false, needsConfirmation: false }
       }
       if (isAlreadyRegistered(data.user)) {
-        error.value = 'already_registered'
+        logAuthError('signUp', 'email already registered (empty identities)')
+        error.value = 'emailExists'
         return { ok: false, needsConfirmation: false }
       }
       return { ok: true, needsConfirmation: data.session === null }
     } catch (caught) {
-      error.value = toErrorMessage(caught)
+      logAuthError('signUp', caught)
+      error.value = 'generic'
       return { ok: false, needsConfirmation: false }
     } finally {
       isSubmitting.value = false

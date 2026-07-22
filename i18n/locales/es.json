@@ -89,7 +89,15 @@
     "noAccount": "¿No tienes cuenta? Crear una",
     "haveAccount": "¿Ya tienes cuenta? Entrar",
     "checkEmail": "Revisa tu correo para confirmar la cuenta.",
-    "alreadyRegistered": "Este correo ya tiene una cuenta. Intenta entrar en vez de crear una nueva.",
+    "errors": {
+      "rateLimited": "Demasiados intentos en poco tiempo. Espera unos minutos e intenta de nuevo.",
+      "weakPassword": "Contraseña muy débil. Usa al menos 6 caracteres.",
+      "invalidCredentials": "Correo o contraseña incorrectos.",
+      "emailExists": "Este correo ya tiene una cuenta. Intenta entrar en vez de crear una nueva.",
+      "emailInvalid": "Correo inválido.",
+      "signupDisabled": "Registro deshabilitado por ahora. Habla con la coordinación.",
+      "generic": "No se pudo continuar. Intenta de nuevo en un momento."
+    },
     "role": "¿Cuál es tu rol?",
     "adminNote": "El administrador se define manualmente por la coordinación.",
     "roles": {
